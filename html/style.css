@@ -1,0 +1,776 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+}
+.bg{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh; 
+    object-fit: cover; 
+    z-index: -20;
+    -webkit-user-drag: none;
+}
+.topnav{
+    overflow: hidden;   
+    background-color: #11171a;
+    top: 0;
+    left: 0;
+}
+.topnav a{
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+.topnav a:hover, .topnav a.active{
+    background-color: #e40f23;
+}
+.topnav a.main {
+    background-color: #e40f23;
+}
+.topnav a.dropdownbutton{
+    cursor: pointer;
+}
+.topnav a.inicio-sesion{
+    float: right;
+}
+
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #11171a;
+}
+  
+li {
+    float: left;
+}
+
+li a:hover, .dropdown:hover .dropdownbutton {
+    background-color: #e40f23;
+}
+
+li a, .dropdownbutton {
+    display: inline-block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+li.dropdown {
+    display: inline-block;
+    z-index: 20;
+}
+
+.dropdown-content {
+    display: flex;
+    opacity: 1;
+    flex-direction: column;
+    position: absolute;
+    background-color: #11171a;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 19;
+    margin-top: 47px;
+    overflow: hidden;
+    border-radius: 0 0 5px 5px;
+    height: 0;
+    transition-property: height;
+    transition-delay: 0;
+    transition-duration: 0.5s;
+    transition-timing-function: ease;
+}
+
+.dropdown-content a {
+    color: #f2f2f2; 
+    padding: 12px 16px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.dropdown-content a:hover {background-color: #e40f23;}
+
+.dropdown:hover .dropdown-content {
+  height: 265px;
+  opacity: 1;
+}
+
+.texto-inicio{
+    text-align: center;
+    margin-top: 5%;
+    width: 60%;
+    transform: translateX(35%);
+    font-size: 20px;
+}
+.titulo{
+    font-size: 50px;
+    font-weight: 700;
+}
+
+footer{
+    bottom: 0px;
+    left: 0px;
+    height: 5%;
+    width: 100%;
+    background-color: black;
+    position: fixed;
+    color: white;
+}
+
+.container-sesion {
+    background-color: #e40f23;
+    height: auto;
+    width: 30%;
+    position: absolute;
+    left: 35%;
+    top: 20%;
+    color: #f2f2f2;
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+.title-container{
+   font-size: 40px;
+}
+
+.datos-usuario{
+    text-align: left;
+    margin-left: 10%;
+    font-weight: 500;
+    font-size: 25px;
+}
+
+.input-inicio{
+    width: 90%;
+    height: 50px;
+}
+
+.but-ini{
+    margin-top: 10%;
+    margin-bottom: 5%;
+    width: 40%;
+    height: 10%;
+    display:inline-block;
+    padding:0.35em 1.2em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-weight:300;
+    text-align:center;
+
+}
+
+.button-container{
+    text-align: center;
+    align-items: center;
+    align-content: center;
+}
+
+.row-button{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 5%;
+
+}
+
+.button-juego{
+    color: #f2f2f2;
+    text-transform: uppercase;
+    text-decoration: none;
+    background-color: #e40f23;
+    padding: 5em 8em 5em 8em;
+    border-radius: 15px;
+    display: inline-block;
+    border: none;
+    transition: all 0.4s ease 0s;
+    box-sizing: content-box;
+    height: 11%;
+    width: 14%;
+    margin: 0 auto;
+}
+
+.button-juego:hover {
+    background: #11171a;
+    letter-spacing: 5px;
+    -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+    -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+    box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
+    transition: all 0.4s ease 0s;
+}
+
+#brawlstarslogo{
+    width: 12%;
+    margin-top: 2%;
+}
+
+#fortnitelogo{
+    margin-top: 2.75%;
+    width: 15%;
+    margin-bottom: 2.75%;
+}
+
+#clashlogo{
+    width: 20%;
+}
+
+#csgologo{
+    width: 19%;
+}
+
+#lollogo{
+    margin-top: 0.5%;
+    width: 22%;
+    margin-bottom: 2%;
+}
+
+#fifalogo{
+    margin-top: 1.3%;
+    width: 20%;
+    margin-bottom: 2.6%;
+}
+
+.link-equipo{
+    color: #f2f2f2;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0em 1em 0em 1em;
+    border-radius: 15px;
+    display: inline-block;
+    box-sizing: content-box;
+    height: 100%;
+    width: 100%;
+    margin-top: 0;
+    background-size: cover;
+    clear: both;
+}
+.link-equipo-bs{
+    background-image: url(images/brawl-wallpaper.jpg);
+}
+
+.link-equipo-cr{
+    background-image: url(images/clash-wallpaper.png);
+}
+
+.link-equipo-csgo{
+    background-image: url(images/csgo-wallpaper.jpg);
+}
+
+.link-equipo-fifa{
+    background-image: url(images/fifa-wallpaper.jpg);
+}
+
+.link-equipo-lol{
+    background-image: url(images/lol-wallpaper.jpg);
+}
+
+.link-equipo-fort{
+    background-image: url(images/fortnite-wallpaper.jpg);
+}
+
+.optionsEquipos img{
+    width: 50px;
+    margin-top: 5px;
+}
+
+.optionsEquipos{
+    float: right;
+    margin-bottom: 5%;
+}
+
+.equipos-container{
+    position: absolute;
+    left: 20%;
+    right: 20%;
+}
+
+.equipo-container{
+    text-transform: uppercase;
+    display: inline;
+    padding-right: 0px;
+}
+
+.nombre-equipo{
+    font-weight: 900;
+    font-size: 50px;
+    text-align: center;
+    -webkit-text-stroke: #11171a;
+    -webkit-text-stroke-width: 2px;
+}
+
+table.center{
+    width: 100%;
+    margin-top: 2%;
+    margin-bottom: 5%;
+    border-collapse: collapse;
+    z-index: 3;
+    border-bottom: 3px solid black;
+}
+
+#divTablaSocial{
+    margin-left: 18%;
+    margin-right: 18%;
+}
+
+#tablaSocial img{
+    width: 45px;
+    margin-right: 3px;
+    margin-left: 3px;
+}
+
+#partidos table img{
+    width: 25px;
+}
+
+#tablaSocial th{
+    background-color: #11171a;
+    padding: 30px 70px;
+    text-align: center;
+    color: #f2f2f2;
+    font-size: larger;
+}
+
+#partidos table th{
+    background-color: #11171a;
+    padding: 20px 55px;
+    text-align: center;
+    color: #f2f2f2;
+}
+
+#tablaSocial td{
+    border-left: 3px solid black;
+    border-right: 3px solid black;
+    text-align: center;
+    padding: 20px 70px;
+}
+
+#partidos table td{
+    border-left: 3px solid black;
+    border-right: 3px solid black;
+    text-align: center;
+    padding: 10px 40px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(odd) {
+    background-color: #aeaeae;
+}
+
+tr:last-child{
+    border-bottom: 3px solid black;
+}
+
+tr:first-child th{
+    text-transform: uppercase;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+#tablaSocial td:last-child{
+    padding: 0;
+}
+
+#partidos td:last-child{
+    padding: 0;
+}
+
+th:last-child{
+    border-right: 3px solid #11171a;
+}
+
+th:first-child{
+    border-left: 3px solid #11171a;
+}
+
+#partidos{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form{
+    padding: 0.6%;
+    background-color: #3b3a3a;
+    height: auto;
+    width: 50%;
+    color: #f2f2f2;
+    text-align: left;
+    font-size: 15px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+.form input, .form select{
+    font-size: 15px;
+    width: 100%;
+    padding: 1%;
+}
+
+.form label{
+    display: inline-block;
+    margin-bottom: 1%;
+}
+
+.send-button{
+    margin-top: 1%;
+    margin-left: 70%;
+}
+#submitEvento{
+    height: 50px;
+}
+
+form #title{
+    font-size: 50px;
+    text-align: center;
+    position: relative;
+    margin: 0 auto;
+}
+
+#socialSearchBar{
+    margin-top: 2%;
+    display: flex;
+    flex-direction: row;
+    transform: translateX(22%);
+    width: 80%;
+    vertical-align: middle;
+}
+
+#socialSearchBar label:first-child, #rrssHeader label{
+    margin-right: 10px;
+}
+
+#socialSearchBar label{
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+#socialSearchBar input[type=date], #rrssHeader input[type=date]{
+    padding: 5px;
+}
+
+#socialSearchBar img{
+    width: 25px;
+    vertical-align: middle;
+}
+#socialSearchBar a{
+    padding: 5px;
+    vertical-align: middle;
+}
+
+#new{
+    margin-left: 40px;
+}
+
+.hiden{
+    display: none;
+    width: 25px;
+}
+
+input[type="date"]::-webkit-clear-button {
+    display: none;
+}
+
+input[type="date"]::-webkit-inner-spin-button { 
+    display: none;
+}
+
+input[type="date"]{
+    font-size: 15px;
+}
+
+.backArrow{
+    margin-left: 0.5%;
+    margin-top: 0.25%;
+}
+
+.backArrow img{
+    width: 50px;
+}
+
+#rrssHeader{
+    margin-left: 25%;
+    margin-right: 21%;
+}
+
+#rrssHeader h1{
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+
+#rrssHeader h1 img{
+    height: 50px;
+    vertical-align: middle;
+}
+
+#rrssHeader a{
+    float: right;
+
+}
+
+#rrssLink{
+    display: block;
+    margin-bottom: 33px;
+    float: none !important;
+    color: #848484;
+    text-decoration: none;
+}
+
+#rrssHeader img{
+    width: 50px;
+    vertical-align: middle;
+}
+
+.error{
+    color: yellow;
+}
+
+.equipo{
+    text-align: center;
+    align-items: center;
+    align-self: center;
+    margin-top: 2%;
+    background-color: #3b3a3a;
+    width: 60%;
+    margin-left: 20%;
+    padding-bottom: 20px;
+    margin-bottom: 2%;
+}
+.titulo-equipo{
+    color: #f2f2f2;
+    width: 100%;
+    font-size: 50px;
+
+}
+
+.titulo-equipo a{
+    margin: 0;
+    text-decoration: none;
+    color:  #f2f2f2;
+}
+.contenido-equipo{
+    color:  #f2f2f2;
+    margin-bottom: 5%;
+}
+.contenido-equipo p{
+    font-size: 20px;
+    margin: 0;
+}
+
+.contenido-equipo a{
+    text-decoration: none;
+    color:  #f2f2f2;
+}
+
+.titulo{
+    font-size: 50px;
+    margin: 0;
+    font-weight: 600;
+}
+
+.moreDetailsButton{
+    text-decoration: none;
+    color: #11171a;
+    font-size: 20px;
+}
+.errorMsg{
+    color: #11171a;
+    font-size: 15px;
+    
+}
+.details{
+    position: absolute;
+    left: 22%;
+    top: 56%;
+    width: 56%;
+}
+.Busqueda-plantilla{
+    width: 70%;
+}
+.Busqueda-plantilla input{
+    padding: 5px;
+    width: 100%;
+    border-color: #11171a;
+    outline: none;
+    background-image: url(images/searchIcon.png);
+    background-repeat: no-repeat;
+    background-size: 20px;
+    background-position: 99%;
+}
+.details .index{
+    float: right;
+    font-size: 25px;
+}
+#newEquipo{
+    text-align: center;
+    margin-top: 1%;
+    padding: 2%;
+    border: 3px #11171a solid;
+    width: 50%;
+    margin-left: 26%;
+    margin-bottom: 1%;
+    font-size: 35px;
+    border-radius: 15px;
+    text-decoration: none;
+    color: #11171a;
+    display: inline-block;
+}
+.newPlantilla{
+    margin-right: 5.1%;
+    height: 35px;
+}
+
+.newPlantilla img{
+    width: 25px;
+}
+
+.searchtools{
+    display: flex;
+    flex-direction: row;
+    margin-left: 65%;
+}
+
+.jugador{
+    background-color: #3b3a3a;
+    width: 60%;
+    margin-left: 20%;
+    padding-bottom: 20px;
+    margin-bottom: 2%;
+    color: #f2f2f2;
+    text-transform: uppercase;
+}
+
+.top-jugador{
+    display: flex;
+    flex-direction: row;
+}
+
+.jugador-info{
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    width: auto;
+    margin-left: 20%;
+}
+
+.jugador-info p{
+    text-align: center;
+    padding: 2%;
+    background-color: #3b3a3a;
+    margin: 0;
+    border-top-right-radius: 30px;
+    border: 2px solid black;
+    border-bottom: none;
+}
+
+#estadisticas-personales{
+    background-color: #f2f2f2;
+}
+
+#estadisticas-personales a{
+    color: #3b3a3a;
+}
+
+.jugador-info a{
+    text-decoration: none;
+    color: #f2f2f2;
+    margin: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.botones-jugador img{
+    padding-top: 10%;
+    width: 40px;
+}
+.sp{
+    margin-left: 5%;
+}
+
+.jugador div{
+    padding: 10px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.jugador .nick-jugador{
+    font-size: 40px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.jugador p{
+    margin: 0;
+    margin-left: 1%;
+    color: #e40f23;
+}
+
+.estadisticas{
+    display: none;
+    background-color: #3b3a3a;
+    width: 60%;
+    margin-left: 20%;
+    padding-bottom: 20px;
+    margin-bottom: 2%;
+    color: #f2f2f2;
+    text-transform: uppercase;
+}
+
+.estadisticas div{
+    padding: 10px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.estadisticas .nick-jugador{
+    font-size: 40px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.estadisticas p{
+    margin: 0;
+    margin-left: 1%;
+    color: #e40f23;
+}
+
+.tabla-partidos{
+    width: fit-content;
+    font-size: 15px;
+}
+
+#submitEstadisticas{
+    margin-top: 5%;
+}
+
+.editdelete{
+    display: flex;
+    flex-direction: row;
+    padding-left: 30px; 
+    padding-top: 5px;
+}
+
+#welcoming:hover{
+    background-color: #11171a;
+}
+
+#oldest{
+    border: 1px solid black;
+}
+#newest{
+    border: 1px solid black;
+}

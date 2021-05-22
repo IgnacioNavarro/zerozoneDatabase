@@ -1,0 +1,379 @@
+DROP TABLE EVENTOS;
+DROP TABLE SEPUBLICAEN;
+DROP TABLE PUBLICACIONES;
+DROP TABLE REDESSOCIALES;
+
+DROP TABLE ENTRENA;
+DROP TABLE COMPITEEN;
+DROP TABLE ANALIZA;
+DROP TABLE PARTICIPAEN;
+DROP TABLE JUEGA;
+DROP TABLE SEENFRENTAEN;
+
+DROP TABLE PARTIDOSCSGO;
+DROP TABLE PARTIDOSFORTNITE;
+DROP TABLE PARTIDOSBRAWL;
+DROP TABLE PARTIDOSLOL;
+DROP TABLE PARTIDOSCLASHROYALE;
+DROP TABLE PARTIDOSFIFA;
+
+DROP TABLE PARTIDOS;
+DROP TABLE EQUIPOSRIVALES;
+DROP TABLE LIGAS;
+
+DROP TABLE ESTADISTICASFIFA;
+DROP TABLE ESTADISTICASBRAWLSTARS;
+DROP TABLE ESTADISTICASCLASHROYALE;
+DROP TABLE ESTADISTICASLOL;
+DROP TABLE ESTADISTICASCSGO;
+DROP TABLE ESTADISTICASFORTNITE;
+
+DROP TABLE DISE�ADORES;
+DROP TABLE MANAGERS CASCADE CONSTRAINT;
+DROP TABLE COACHS;
+DROP TABLE ANALISTAS;
+DROP TABLE JUGADORES;
+DROP TABLE DIRECTIVOS;
+DROP TABLE COMMUNITY_MANAGERS;
+DROP TABLE EQUIPOS;
+DROP TABLE ESTADISTICAS CASCADE CONSTRAINT;
+DROP TABLE EMPLEADOS CASCADE CONSTRAINT;
+
+
+
+
+/*s�lo est� creada, sin condici�n ninguna etc etc)*/
+CREATE TABLE EMPLEADOS
+(dni char(9) PRIMARY KEY not null,
+nombre varchar2 (50)NOT NULL,
+edad integer NOT NULL,
+telefono integer UNIQUE,
+tipoEmpleado varchar2(50),
+seccion varchar2(50),
+fechaInicioContrato date,
+fechaFinContrato date,
+experienciaPrevia CHAR(1),
+horasMensuales integer,
+correo varchar2(50),
+nick varchar2(50) NOT NULL,
+redesSociales varchar2(50),
+direccion varchar2(100),
+tallaCamiseta varchar2(2),
+    CONSTRAINT "empleado_chk" CHECK (tipoEmpleado IN('Jugador', 'Manager', 'Coach' , 'Analista', 'Directiva' , 'Dise�ador', 'Community Manager')),
+        CONSTRAINT "seccion_chk" CHECK (seccion IN('Clash Royale', 'Brawl Stars', 'FIFA' , 'LOL', 'CSGO' , 'FORTNITE')),
+        CONSTRAINT "bool_chk"  CHECK(experienciaPrevia IN ('Y','N')),
+        CONSTRAINT "talla_chk" CHECK(tallaCamiseta IN ('XS','S', 'M', 'L', 'XL')),
+        CONSTRAINT "fechacontrato_chk" CHECK (fechaInicioContrato < fechaFinContrato)
+);
+
+
+CREATE TABLE COMMUNITY_MANAGERS(
+dni char(9) PRIMARY KEY NOT NULL,
+FOREIGN KEY (dni) REFERENCES EMPLEADOS(dni) ON DELETE CASCADE
+);
+
+CREATE TABLE DISE�ADORES(
+dni char(9) PRIMARY KEY NOT NULL,
+FOREIGN KEY (dni) REFERENCES EMPLEADOS(dni) ON DELETE CASCADE
+);
+
+CREATE TABLE MANAGERS(
+dni char(9) PRIMARY KEY NOT NULL,
+FOREIGN KEY (dni) REFERENCES EMPLEADOS(dni) ON DELETE CASCADE
+);
+
+CREATE TABLE COACHS(
+dni char(9) PRIMARY KEY NOT NULL,
+FOREIGN KEY (dni) REFERENCES EMPLEADOS(dni) ON DELETE CASCADE
+);
+
+CREATE TABLE ANALISTAS(
+dni char(9) PRIMARY KEY NOT NULL,
+FOREIGN KEY (dni) REFERENCES EMPLEADOS(dni) ON DELETE CASCADE
+);
+
+CREATE TABLE DIRECTIVOS(
+dni char(9) PRIMARY KEY NOT NULL,
+FOREIGN KEY (dni) REFERENCES EMPLEADOS(dni) ON DELETE CASCADE
+);
+/*equipos es de la pagina dos pero jugadores lo necesita*/
+CREATE TABLE EQUIPOS(
+OID_EQ integer PRIMARY KEY,
+dni char(9),
+nombre varchar2(50) NOT NULL,
+clasificacionGlobal integer,
+clasificacionNacional integer,
+FOREIGN KEY (dni) REFERENCES MANAGERS(dni)
+);
+
+CREATE TABLE JUGADORES(
+dni char(9) PRIMARY KEY NOT NULL,
+posicionesPrincipales varchar2(50),
+nombreTutor varchar2(50) default  null,
+dniTutor char(9) default null,
+telefonoTutor integer default null,
+correoTutor varchar2(50) default null,
+OID_EQ integer,
+FOREIGN KEY (dni) REFERENCES EMPLEADOS(dni) ON DELETE CASCADE, 
+FOREIGN KEY (OID_EQ) REFERENCES EQUIPOS(OID_EQ) ON DELETE SET NULL
+);
+
+
+CREATE TABLE ESTADISTICAS(
+OID_ST integer PRIMARY KEY,
+dni char(9) NOT NULL,
+mes varchar2(50),
+horasTrabajadas integer,
+FOREIGN KEY (dni) REFERENCES EMPLEADOS(dni) ON DELETE CASCADE,
+CONSTRAINT "mes_chk" CHECK (mes IN('Enero', 'Febrero', 'Marzo' , 'Abril', 'Mayo' , 'Junio', 'Julio',
+    'Agosto', 'Septiembre','Octubre', 'Noviembre', 'Diciembre'))
+
+);
+
+CREATE TABLE ESTADISTICASFIFA(
+OID_ST integer PRIMARY KEY,
+winRate number(5,2),
+golesPorPartido number(3,1),
+
+FOREIGN KEY (OID_ST) REFERENCES ESTADISTICAS(OID_ST) ON DELETE CASCADE,
+CONSTRAINT "goles_chk" CHECK (golesPorPartido >= 0)
+);
+
+CREATE TABLE ESTADISTICASBRAWLSTARS(
+OID_ST integer PRIMARY KEY,
+winRatePorBrawler number(5,2),
+winRateGlobal number(5,2),
+copas integer,
+
+FOREIGN KEY (OID_ST) REFERENCES ESTADISTICAS(OID_ST) ON DELETE CASCADE,
+CONSTRAINT "copas_chk" CHECK (copas > 0)
+);
+
+CREATE TABLE ESTADISTICASLOL(
+OID_ST integer PRIMARY KEY,
+winRatePorCampeon number(5,2),
+KDAPorCampeon number(5,2),
+
+FOREIGN KEY (OID_ST) REFERENCES ESTADISTICAS(OID_ST) ON DELETE CASCADE
+);
+
+CREATE TABLE ESTADISTICASCSGO(
+OID_ST integer PRIMARY KEY,
+winRate number(5,2),
+KDA number(5,2),
+
+FOREIGN KEY (OID_ST) REFERENCES ESTADISTICAS(OID_ST) ON DELETE CASCADE
+);
+
+CREATE TABLE ESTADISTICASFORTNITE(
+OID_ST integer PRIMARY KEY,
+horasStreaming integer,
+KDA number(5,2),
+
+FOREIGN KEY (OID_ST) REFERENCES ESTADISTICAS(OID_ST) ON DELETE CASCADE,
+CONSTRAINT "horasfort_chk" CHECK(horasStreaming > 5)
+);
+
+CREATE TABLE ESTADISTICASCLASHROYALE(
+OID_ST integer PRIMARY KEY,
+winRateGlobal number(5,2),
+partidasPorMazo number(4,2),
+winRatePorMazo number(5,2),
+hechizos integer,
+
+FOREIGN KEY (OID_ST) REFERENCES ESTADISTICAS(OID_ST) ON DELETE CASCADE
+);
+
+
+
+/*pagina 2*/
+/*EQUIPOS VA ENCIMA DE JUGADORES*/
+
+CREATE TABLE ENTRENA(
+OID_ENT integer PRIMARY KEY,
+dni char(9),
+OID_EQ integer,
+FOREIGN KEY (dni) REFERENCES COACHS(dni) ON DELETE CASCADE,
+FOREIGN KEY (OID_EQ) REFERENCES EQUIPOS(OID_EQ) ON DELETE CASCADE
+);
+
+
+CREATE TABLE ANALIZA(
+OID_ANZ integer PRIMARY KEY,
+dni char(9),
+OID_EQ integer,
+
+FOREIGN KEY (dni) REFERENCES ANALISTAS(dni) ON DELETE CASCADE,
+FOREIGN KEY (OID_EQ) REFERENCES EQUIPOS(OID_EQ) ON DELETE CASCADE
+);
+
+CREATE TABLE LIGAS(
+OID_LG integer PRIMARY KEY,
+nombre varchar2(50) NOT NULL,
+posicion integer default null,
+importePremio integer,
+fechaCobroPremio date default null
+);
+
+
+CREATE TABLE COMPITEEN(
+OID_CE integer PRIMARY KEY,
+OID_EQ integer,
+OID_LG integer,
+FOREIGN KEY (OID_LG) REFERENCES LIGAS(OID_LG) ON DELETE CASCADE,
+FOREIGN KEY (OID_EQ) REFERENCES EQUIPOS(OID_EQ) ON DELETE CASCADE
+);
+
+CREATE TABLE EQUIPOSRIVALES(
+OID_ER integer PRIMARY KEY,
+nombre varchar2(50),
+jugadores varchar2(50),
+logo char(1),
+
+CONSTRAINT "bool_chk2"  CHECK(logo IN ('Y','N'))
+);
+
+CREATE TABLE PARTICIPAEN(
+OID_PE integer PRIMARY KEY,
+OID_ER integer,
+OID_LG integer,
+FOREIGN KEY (OID_LG) REFERENCES LIGAS(OID_LG) ON DELETE CASCADE,
+FOREIGN KEY (OID_ER) REFERENCES EQUIPOSRIVALES(OID_ER) ON DELETE CASCADE
+);
+
+CREATE TABLE PARTIDOS(
+OID_PT integer PRIMARY KEY,
+resultado varchar2(50),
+tipoPartido varchar2(50),
+videojuego varchar2(50),
+fecha date,
+jugadoresSeleccionados varchar2(50),
+OID_LG integer,
+FOREIGN KEY (OID_LG) REFERENCES LIGAS(OID_LG) ON DELETE SET NULL,
+
+CONSTRAINT "videojuego_chk"  CHECK(videojuego IN ('Brawl Stars','Clash Royale', 'Fortnite', 'CSGO', 'LOL', 'Fifa')),
+CONSTRAINT "tipoPartido_chk"  CHECK(tipoPartido IN ('Amistoso','Liga', 'Entrenamiento'))
+);
+
+CREATE TABLE JUEGA(
+OID_JG integer PRIMARY KEY,
+OID_EQ integer,
+OID_PT integer,
+FOREIGN KEY (OID_PT) REFERENCES PARTIDOS (OID_PT) ON DELETE CASCADE,
+FOREIGN KEY (OID_EQ) REFERENCES EQUIPOS(OID_EQ)ON DELETE CASCADE
+);
+
+CREATE TABLE SEENFRENTAEN(
+OID_SEF integer PRIMARY KEY,
+OID_PT integer,
+OID_ER integer,
+FOREIGN KEY (OID_PT) REFERENCES PARTIDOS (OID_PT) ON DELETE CASCADE,
+FOREIGN KEY (OID_ER) REFERENCES EQUIPOSRIVALES(OID_ER) ON DELETE CASCADE
+);
+
+CREATE TABLE PARTIDOSCSGO(
+OID_PT integer PRIMARY KEY,
+mapa varchar2(50),
+puntuacion integer,
+comprasPorRonda integer,
+
+FOREIGN KEY (OID_PT) REFERENCES PARTIDOS(OID_PT) ON DELETE CASCADE,
+CONSTRAINT "puntuacion_chk"  CHECK(puntuacion >= 0 and puntuacion <= 16)
+);
+
+CREATE TABLE PARTIDOSFORTNITE(
+OID_PT integer PRIMARY KEY,
+bajas integer,
+tipo varchar2(50),
+posicion integer NOT NULL,
+puntos integer,
+
+FOREIGN KEY (OID_PT) REFERENCES PARTIDOS(OID_PT) ON DELETE CASCADE,
+CONSTRAINT "bajas_chk1"  CHECK(bajas >= 0),
+CONSTRAINT "posicion_chk1"  CHECK(posicion >= 0 and posicion <= 100),
+CONSTRAINT "tipo_chk1"  CHECK(tipo IN ('SOLO', 'DUO', 'SQUAD'))
+);
+
+CREATE TABLE PARTIDOSBRAWL(
+OID_PT integer PRIMARY KEY,
+mapa varchar2(50),
+modo varchar2(50),
+brawlers varchar2(50),
+puntuacion varchar2(50),
+
+FOREIGN KEY (OID_PT) REFERENCES PARTIDOS(OID_PT) ON DELETE CASCADE,
+CONSTRAINT "modo_chk"  CHECK(modo IN('Atrapa Gemas', 'Atraco', 'Caza Estelar' , 'Balon Brawl', 'Asedio'))
+);
+
+
+
+CREATE TABLE PARTIDOSLOL(
+OID_PT integer PRIMARY KEY,
+kda number(4,2),
+campeones varchar2(150),
+baneos varchar2(150),
+objetivos integer,
+builds varchar2(150),
+
+
+FOREIGN KEY (OID_PT) REFERENCES PARTIDOS(OID_PT) ON DELETE CASCADE
+);
+
+CREATE TABLE PARTIDOSCLASHROYALE(
+OID_PT integer PRIMARY KEY,
+puntuacion integer,
+baneos varchar2(50),
+mazos varchar2(100),
+modo varchar2(50),
+
+FOREIGN KEY (OID_PT) REFERENCES PARTIDOS(OID_PT) ON DELETE CASCADE,
+CONSTRAINT "modo_chk2"  CHECK(modo IN('1vs1', '2vs2'))
+);
+
+CREATE TABLE PARTIDOSFIFA(
+OID_PT integer PRIMARY KEY,
+equiposFutbol varchar2(50),
+goles integer,
+
+FOREIGN KEY (OID_PT) REFERENCES PARTIDOS(OID_PT) ON DELETE CASCADE,
+CONSTRAINT "goles_chk2"  CHECK(goles >= 0)
+);
+
+
+
+/*pagina 3*/
+
+CREATE TABLE REDESSOCIALES(
+OID_RRSS integer PRIMARY KEY,
+nombre varchar2(50) NOT NULL,
+fecha date,
+numeroSeguidores integer,
+interacciones integer
+);
+
+CREATE TABLE PUBLICACIONES(
+OID_PB integer PRIMARY KEY,
+fecha date,
+disenoListo char(1),
+
+CONSTRAINT "Diseno_chk"  CHECK(disenoListo IN ('Y', 'N'))
+);
+
+CREATE TABLE SEPUBLICAEN(
+OID_SPE integer PRIMARY KEY,
+OID_PB integer REFERENCES PUBLICACIONES (OID_PB) ON DELETE CASCADE,
+OID_RRSS integer REFERENCES REDESSOCIALES (OID_RRSS) ON DELETE CASCADE
+);
+
+CREATE TABLE EVENTOS(
+OID_EV integer PRIMARY KEY,
+OID_ER integer,
+OID_PB integer default null,
+tipoEvento varchar2(50) NOT NULL,
+fecha date,
+
+FOREIGN KEY (OID_ER) REFERENCES EQUIPOSRIVALES(OID_ER),
+FOREIGN KEY (OID_PB) REFERENCES PUBLICACIONES (OID_PB),
+CONSTRAINT "tipoEvento_chk"  CHECK(tipoEvento IN ('Partido', 'Anuncio', 'Presencial' , 'Variado'))
+);
+
